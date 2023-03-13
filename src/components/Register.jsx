@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import './styles/Register.css'
+import './styles/Register.css';
+import * as auth from '../auth.js'
 
 const Register = () => {
   const [formValue, setFormValue] = useState({
@@ -24,6 +25,14 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (formValue.password === formValue.confirmPassword) {
+      const { username, password, email } = formValue;
+      
+      auth.register(username,password,email).then( res => {
+        navigate('/login', {replace: true});
+      })
+    }
   }
 
   return (
