@@ -1,5 +1,5 @@
 import React from 'react';
-import './Diary.css';
+import './styles/Diary.css';
 import FoodAdder from './FoodAdder';
 
 class Diary extends React.Component {

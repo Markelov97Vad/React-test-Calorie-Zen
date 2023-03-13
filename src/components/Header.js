@@ -1,6 +1,6 @@
 import React from 'react';
 import headerLogo from '../images/calorieZen.png';
-import './Header.css';
+import './styles/Header.css';
 
 function Header() {
   return (
