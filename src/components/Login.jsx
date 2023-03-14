@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import './styles/Login.css'
+import { Link, useNavigate } from "react-router-dom";
+import * as auth from '../auth.js'
+import './styles/Login.css';
 
-function Login () {
+function Login (props) {
 
   // const [username, setUsername] = useState('');
   // const [password, setPassword] = useState('');
@@ -11,6 +12,8 @@ function Login () {
     username: '',
     password: ''
   })
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -23,6 +26,21 @@ function Login () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!formValue.username || !formValue.password) {
+      return
+    }
+    auth.authorize(formValue.username, formValue.password)
+      .then((data) => {
+        if (data.jwt) {
+          console.log(setFormValue({username: '', password: ''}))
+          console.log('hello')
+          setFormValue({username: '', password: ''});
+          props.handleLogin();
+          navigate('/diary', {replace: true});
+        }
+      })
+      .catch(err => console.log(`ошибка в обработке jwt ${err}`))
   }
 
   return (

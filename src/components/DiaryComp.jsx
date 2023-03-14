@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FoodAdder from "./FoodAdder";
+import './styles/Diary.css'
 
 function DiaryComp () {
   // const [foodList, setFoodList] = useState('');

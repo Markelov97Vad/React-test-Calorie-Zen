@@ -12,7 +12,11 @@ import ProtectedRouteElement from './ProtectedRouteElement';
 
 function App() {
 
-  const [loggetIn, setLoggetIn] = useState(false)
+  const [loggetIn, setLoggetIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggetIn(true);
+  }
 
   return (
     <BrowserRouter>
@@ -24,7 +28,7 @@ function App() {
           <Route path="/tips" element={<ProtectedRouteElement element={Tips}  loggetIn={loggetIn}/>} />
           <Route path='/diary' element={<ProtectedRouteElement element={DiaryComp}  loggetIn={loggetIn}/>} />
           <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login handleLogin={handleLogin} />} />
         </Routes>
       </main>
     </BrowserRouter>
