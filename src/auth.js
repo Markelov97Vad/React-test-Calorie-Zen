@@ -36,3 +36,19 @@ export const authorize = (identifier, password) => {
   })
   .catch(err => console.log(`что-то случилось ${err}`))
 }
+
+export const checkToken = (tocken) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tocken}`
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    return data
+  })
+}

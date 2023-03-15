@@ -3,25 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import * as auth from '../auth.js'
 import './styles/Login.css';
 
-function Login (props) {
+// JWT = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc2MCwiaWF0IjoxNjc4Nzk4OTU2LCJleHAiOjE2ODEzOTA5NTZ9.SVtLQ83sUQqgiaGfxrzW5rxrkST1VXaHpWMPgAQr3IQ
+// JWT2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc2MSwiaWF0IjoxNjc4Nzk5Mjk1LCJleHAiOjE2ODEzOTEyOTV9.r-Zowx8CaaS14cNHJghzUBlnp6Om37zlNWaV5fW_Zbo
 
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
+function Login ({handleLogin}) {
 
   const [ formValue, setFormValue] = useState({
     username: '',
     password: ''
   })
-
+  
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const {name, value} = e.target;
 
-    setFormValue({
+    setFormValue(({
       ...formValue,
       [name]: value
-    })
+    }))
   }
 
   const handleSubmit = (e) => {
@@ -33,11 +33,11 @@ function Login (props) {
     auth.authorize(formValue.username, formValue.password)
       .then((data) => {
         if (data.jwt) {
-          console.log(setFormValue({username: '', password: ''}))
-          console.log('hello')
+          console.log(data)
           setFormValue({username: '', password: ''});
-          props.handleLogin();
+          handleLogin();
           navigate('/diary', {replace: true});
+          console.log(localStorage.getItem('jwt'))
         }
       })
       .catch(err => console.log(`ошибка в обработке jwt ${err}`))
@@ -56,7 +56,7 @@ function Login (props) {
         <label htmlFor="password">
           Пароль:
         </label>
-        <input id="password" name='password' type='password' value={formValue.password} onChange={handleChange} required/>
+        <input id="password" vvv='vadim' name='password' type='password' value={formValue.password} onChange={handleChange} required/>
         <div className="login__button-container">
           <button type="submit" className="login__link">Войти</button>
         </div>
