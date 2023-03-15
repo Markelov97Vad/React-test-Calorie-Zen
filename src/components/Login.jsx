@@ -37,7 +37,6 @@ function Login ({handleLogin}) {
           setFormValue({username: '', password: ''});
           handleLogin();
           navigate('/diary', {replace: true});
-          console.log(localStorage.getItem('jwt'))
         }
       })
       .catch(err => console.log(`ошибка в обработке jwt ${err}`))
